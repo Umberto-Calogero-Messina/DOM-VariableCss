@@ -1,0 +1,28 @@
+.box {
+  width: var(--width-perc);
+  height: 30px;
+  position: fixed;
+  top: 0;
+  &--red {
+    background-color: red;
+  }
+}
+
+.button {
+  position: fixed;
+  top: 150px;
+
+  &--hex {
+    left: 250px;
+  }
+}
+
+.mouse-box {
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  left: var(--box-x-position);
+  top: var(--box-y-position);
+  background-color: red;
+  pointer-events: none;
+}
