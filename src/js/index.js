@@ -13,7 +13,6 @@ import '../scss/styles.scss';
 
 // - Crea un div de 20px x 20px y sincronizalo con el movimiento del ratón, el div deberá quedarse pegado a la flecha de tu ratón y moverse junto a él.
 
-const boxScrollElement = document.getElementById('box-scroll');
 const titleElement = document.getElementById('title');
 const rgbButtonElement = document.getElementById('button-rgb');
 const hexButtonElement = document.getElementById('button-hex');
@@ -22,15 +21,15 @@ const rootStyle = document.documentElement.style;
 const percScrollSize = () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
-  const scrollPercent = scrollTop / docHeight;
+  const scrollPercent = (scrollTop * 100) / docHeight;
 
-  rootStyle.setProperty('--width-perc', scrollPercent * 100 + '%');
+  rootStyle.setProperty('--width-perc', scrollPercent + '%');
 
   setHeigthPosition();
 };
 
 const setHeigthPosition = () => {
-  const scrollTop = window.scrollY;
+  const scrollTop = Math.round(window.scrollY);
   titleElement.textContent = `Te has desplazado de ${scrollTop} px`;
 };
 
@@ -41,7 +40,15 @@ const randomRGBValue = () => {
     colorArray.push(randomNumber);
   }
   rootStyle.setProperty('--bg-primary', `rgb(${colorArray[0]}, ${colorArray[1]}, ${colorArray[2]})`);
+
+  // const red = Math.floor(Math.random() * 255);
+  // const blue = Math.floor(Math.random() * 255);
+  // const yellow = Math.floor(Math.random() * 255);
+
+  // const color = `rgb(${red}, ${blue}, ${yellow})`;
+  // rootStyle.setProperty('--bg-primary', color);
 };
+
 const randomHEXValue = () => {
   const hexLetter = '0123456789ABCDEF';
   let randomColor = '#';
@@ -57,7 +64,6 @@ const randomHEXValue = () => {
 const mouseMovePosition = ev => {
   const xMousePosition = ev.x;
   const yMousePosition = ev.y;
-  console.log(ev.x, ev.y);
 
   rootStyle.setProperty('--box-x-position', xMousePosition + 'px');
   rootStyle.setProperty('--box-y-position', yMousePosition + 'px');
